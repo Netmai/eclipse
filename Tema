@@ -1,0 +1,2057 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<div id="cachecontent">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'><style>
+
+    @font-face {
+        font-family: 'Palanquin Dark';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(pictures/atlantus.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      
+      body
+    {
+      overflow: hidden;
+      position: fixed;
+      font-family: 'Palanquin Dark', sans-serif;
+      background: url(seu link aqui); background-size:cover;
+      color: white;
+      margin: 0px;
+      left: 0px;
+      top: 0px;
+      height: 100%;
+      width: 100%;
+    }
+    
+    #newobjects
+    {
+      position: fixed !important;
+      height: 100% !important;
+      width: 100% !important;
+    z-index: 1 !important;
+      top: 0% !important;
+      left: 0% !important;
+    }
+    
+    .moonbottom
+    {
+      position: fixed;
+    bottom: -5px;
+    width: 150%;
+    height: 138px;
+    left: -25%;
+    background: white;
+    border-top-left-radius: 70%;
+    border-top-right-radius: 70%;
+    }
+     /******************************
+            required css */
+    
+            .draggable {
+         position: absolute;
+         z-index: 9;
+     }
+    
+     .drag-handle {
+         cursor: move;
+         z-index: 10;
+     }
+    
+     .full-draggable {
+         cursor: move;
+     }
+    
+     /*******************************
+            test css */
+    
+     .draggable {
+         background-color: #f1f1f1;
+         border: 1px solid #d3d3d3;
+         text-align: center;
+     }
+    
+     .draggable .drag-handle {
+         padding: 10px;
+         background-color: #2196F3;
+         color: #fff;
+     }
+    
+     #test-draggable2 {
+         left: 200px
+     }
+    
+     #test-full-draggable {
+         left: 500px
+     }
+    .notification
+    {
+      background: linear-gradient(
+        45deg
+        , #3f51b5, #0d4181);
+            transform: translate(0%, -50%);
+            position: fixed;
+            right: 5px;
+            top: 12%;
+            height: 50px;
+            width: max-content;
+            color: white;
+            text-align: left;
+            padding-left: 19px;
+            padding-right: 15px;
+            z-index: 7;
+            font-size: 15px;
+            border-radius: 11px;
+    }
+    
+    #logsview
+    {
+      position: absolute;
+      top: 46px;
+      left: 0px;
+      height: 69%;
+      display: none;
+      font-size: 14px;
+      font-family: sans-serif;
+      width: 100%;
+      text-align: left;
+      color: #ccc;
+      overflow: scroll;
+      padding-left: 20px;
+    }
+    
+    .atlimg.animated {
+        -webkit-animation: filter-animation 5s infinite;
+        animation: filter-animation 5s infinite;
+    }
+    @-webkit-keyframes filter-animation {
+        0% {
+          -webkit-filter: hue-rotate(0deg);
+        }
+        
+        40% {
+          -webkit-filter: hue-rotate(100deg);
+        }
+        
+          76% {
+            -webkit-filter: hue-rotate(
+        241deg);
+        }
+        100% {
+          -webkit-filter: hue-rotate(
+      343deg);
+      }
+      }
+      
+      @keyframes filter-animation {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        
+        50% {
+          filter: hue-rotate(100deg);
+        }
+        86% {
+          filter: hue-rotate(
+      241deg);
+      }
+      100% {
+        filter: hue-rotate(
+      343deg);
+      }
+        
+      }
+    
+      .demotxt
+      {
+        position: fixed; 
+        -webkit-transform: translate(-50%, -50%); 
+        transform: translate(-50%, -50%);
+         left: 50%; top: 50%;
+          font-size: 7vw; width: 85%; 
+          text-shadow: 0px 0px 5px black;
+      }
+      @keyframes demo {
+        0% {
+        box-shadow: 0px 0px 0px 2px #ff004c;;
+        }
+        25% {
+          box-shadow: 0px 0px 0px 2px #8a2b47;;
+        }
+        75% {
+          box-shadow: 0px 0px 0px 2px #4b242f;;
+        }
+        100% {
+          box-shadow: 0px 0px 0px 2px #972b4c;;
+        }
+    }
+    
+      @keyframes shake {
+        0% {
+          transform: translate(-50%, -50%) rotate(
+        0deg);
+          filter: drop-shadow(2px 4px 16px red);
+        }
+        25% {
+          transform: translate(-50%, -50%) rotate(
+        -1deg);
+          filter: drop-shadow(2px 4px 6px rgb(197, 12, 43));
+        }
+        50% {
+          transform: translate(-50%, -50%) rotate(
+        1deg);
+          filter: drop-shadow(2px 4px 6px darkred);
+        }
+        75% {
+          transform: translate(-50%, -50%) rotate(
+        -1deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(
+        -1deg);
+        }
+    }
+    
+    
+    .hshakex {
+      animation: shakex 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+    
+    .hshake {
+      animation: shake 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+    
+    .hshakez {
+      animation: shakez 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+    
+    
+    @keyframes selectedobject {
+    0% {
+        border: 2px dashed #f44336;
+    }
+    25% {
+        border: 2px dashed #e91e63;
+    }
+    50% {
+        border: 2px dashed #9c27b0;
+    }
+    75% {
+        border: 2px dashed #3f51b5;
+    }
+    100% {
+        border: 2px dashed #03a9f4;
+    }
+    }
+    
+    @keyframes shakez {
+      0% {
+        filter: drop-shadow(0px 0px 14px rgb(167, 139, 164));
+      }
+      25% {
+        filter: drop-shadow(0px 0px 10px rgb(167, 144, 168));
+      }
+      50% {
+        filter: drop-shadow(0px 0px 4px rgb(98, 93, 99));
+      }
+      75% {
+      }
+      100% {
+      }
+    }
+    
+      @keyframes shakex {
+        0% {
+          filter: drop-shadow(2px 4px 16px rgb(10, 24, 44));
+        }
+        25% {
+          filter: drop-shadow(2px 4px 6px rgb(2, 26, 49));
+        }
+        50% {
+          filter: drop-shadow(2px 4px 6px rgb(0, 25, 139));
+        }
+        75% {
+        }
+        100% {
+          filter: drop-shadow(2px 4px 6px rgb(2, 26, 49));
+        }
+    }
+    
+    #connecting
+    {   
+      display:none;
+      margin-left: 7px;
+      color: #c7c7c7;
+    }
+    #connected
+    {
+      display:none;
+      color: #1dc471;
+    }
+    .logoapp
+    {
+      height: 140px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        position: fixed;
+    }
+    .lds-ring {
+        display: inline-block;
+           position: absolute;
+           display:none;
+           top: -13px;
+           left: -13px;
+       }
+       .lds-ring div {
+           box-sizing: border-box;
+           display: block;
+           position: absolute;
+           width: 160px;
+           height: 161px;
+           margin: 8px;
+           border: 4px solid #1f312f;
+           border-radius: 50%;
+           animation: lds-ring 0.8s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+           border-color: #3ab757 #41b73a #69b73a #80b73a;
+       }
+       .lds-ring div:nth-child(1) {
+         animation-delay: -0.45s;
+       }
+       .lds-ring div:nth-child(2) {
+         animation-delay: -0.3s;
+       }
+       .lds-ring div:nth-child(3) {
+         animation-delay: -0.15s;
+       }
+       @keyframes lds-ring {
+         0% {
+           transform: rotate(0deg);
+         }
+         100% {
+           transform: rotate(360deg);
+         }
+       }
+    
+       .lds-dual-ringz:after {
+        content: " ";
+        display: block;
+        width: 108px;
+        height: 108px;
+        margin: 0px;
+        border-radius: 50%;
+        margin-left: -21px;
+        margin-top: -12px;
+        border: 2px solid #fff;
+        border-color: #172b4c00 #0e1e3f00 #255caa #2549c8;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+    
+    .lds-dual-ringz {
+      display: inline-block;
+         width: 80px;
+         height: 80px;
+         position: absolute;
+         margin-left: -35px;
+         margin-top: 1px;
+     }
+    
+    .lds-dual-ring {
+        display: inline-block;
+           width: 80px;
+           height: 80px;
+           position: absolute;
+           margin-left: -35px;
+           margin-top: 1px;
+    }
+    
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 12px;
+        height: 12px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        border-color: #508ef8 #303030 #1e1e1e #3c3c3c;
+        animation: lds-dual-ring 1.2s linear infinite;
+       }
+       @keyframes lds-dual-ring {
+         0% {
+           transform: rotate(0deg);
+         }
+         100% {
+           transform: rotate(360deg);
+         }
+    }
+    
+    .lds-dual-ring {
+     display: inline-block;
+        width: 80px;
+        height: 80px;
+        position: absolute;
+        margin-left: -35px;
+        margin-top: 1px;
+    }
+    
+    .lds-dual-ring:after {
+      content: " ";
+        display: block;
+        width: 17px;
+        height: 17px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        border-color: #fff #fff5f536 #fff white;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+    
+    @keyframes lds-dual-ring {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .flagserver
+    {
+      height: 32px;
+      position: absolute;
+      left: 11px;
+      top: 10px;
+    }
+    
+    .substatus
+    {
+        display: inline-block;
+        font-size: 16px;
+        position: relative;
+        left: 7px;
+        top: 0px;
+    }
+    
+    .statusserver
+    {
+      position: absolute;
+      width: 100%;
+      top: 113px;
+      font-size: 16px;
+      color: #9e9e9e;
+      display: inline-block;
+      left: 0px;
+    }
+    
+    .arrowudp
+    {
+      position: absolute;
+        right: 13px;
+        height: 18px;
+        top: 18px;
+        filter: invert(1);
+    }
+    
+    .arrowserver
+    {
+      position: absolute;
+        right: 13px;
+        height: 18px;
+        top: 18px;
+        filter: invert(1);
+    }
+    
+    .descserver
+    {
+      width: 59%;
+      text-align: left;
+      height: 22px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      position: absolute;
+      top: 23px;
+      font-size: 12px;
+      left: 57px;
+      color: #cccc;
+    }
+    
+    .focuinauth
+    {    position: fixed;
+      background: #00000017;
+      height: 200%;
+      width: 100%;
+      top: -176px;
+      z-index: 1;
+      left: 0px;
+      backdrop-filter: blur(0.5px);
+      display:none;
+    }
+    
+    .focuinserver
+    {
+      height: 200%;
+      width: 100%;
+      position: fixed;
+      background: #000000a3;
+      display:none;
+      left: 0px;
+      top: -248px;
+      z-index: 4;
+    }
+    
+    .nameserver
+    {
+      position: absolute;
+      top: 3px;
+      font-size: 16px;
+      width: 64%;
+      text-align: left;
+      left: 57px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .selectedserver
+    {
+      background: #04030491;
+      width: 91%;
+      height: 35px;
+      border-radius: 4px;
+      z-index: 5;
+      padding: 9px;
+      border: 1px solid #0d0d26;
+      position: relative;
+      display: inline-block;
+      top: -54px;
+      box-shadow: 4px 5px 8px 0px #000000;
+      left: 0px;
+    }
+    
+    
+    
+    #logexpand
+    {
+      position: absolute;
+      right: 0px;
+      height: 100%;
+      bottom: 0px;
+      display: none;
+      width: 298px;
+      padding-left: 11px;
+      background: #0a060ce0;
+      z-index: 6;
+      border-bottom-left-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+    
+    #menuexpand
+    {
+      position: absolute;
+      left: 0px;
+      height: 100%;
+      bottom: 0px;
+      display: none;
+      width: 284px;
+      padding-left: 11px;
+      background: #09080cfc;
+      z-index: 6;
+    }
+    
+    .logbubble
+    {
+      
+      background: #15154c;
+      font-size: 10px;
+      border-radius: 60px;
+      z-index: 3;
+      position: absolute;
+      width: 18px;
+      top: 68px;
+      left: 23px;
+    }
+    
+    .connectbt
+    {
+      width: 91%;
+    height: 32px;
+    padding: 10px;
+    background: #060609e3;
+    border: 1px solid #0d0d26;
+    font-size: 21px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 0px #000000;
+    position: relative;
+    top: 21px;
+    display: inline-table;
+    left: 1px;
+    }
+    
+    
+    
+    .inputmax
+    {
+      padding: 11px;
+      width: 48%;
+      font-size: 19px;
+      background: #0d0a1dc7;
+      border: 0;
+      color: #acacac;
+      position: relative;
+      top: 23px;
+      border-radius: 8px;
+      border-radius: 10px;
+    }
+    
+    
+    #nrlixuser
+    {
+      width: 92%;
+      height: 336px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      position: fixed;
+      border-radius: 10px;
+    }
+    
+    #logsbar
+    {
+      
+      position: absolute;
+      bottom: -1px;
+      left: -2px;  
+        height: 77px;
+      font-size: 11px;
+      transition: width 2s, height 0.8s;
+      width: 100%;
+      text-align: center;    z-index: 5;
+      background: #0000004d;
+      color: #ccc;
+      border: 2px solid #160f0fd1;
+      overflow: visible;
+      border-radius: 6px;
+    }
+    
+    .presshere
+    {
+      position: absolute;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      top: 25%;
+      left: 50%;
+      font-size: 18px;
+      width: 330px;
+      text-align: center;
+      color: #cdcdcd;
+      z-index: 2;
+    }
+    
+    
+    
+    .freeimg
+    {
+      height: 40px;
+        width: 40px;
+        background: #ffffff4d url(pictures/crown.png);
+        background-repeat: no-repeat;
+        background-position: 5px;
+        border-radius: 60px;
+        position: absolute;
+        top: 9px;
+        left: 6px;
+    }
+    
+    .freetxtsmall
+    {
+          position: absolute;
+        left: 58px;
+        top: 26px;
+        color: #ccc;
+        font-size: 12px;
+    }
+    .freetxt
+    {
+      position: absolute;
+        left: 58px;
+        top: 4px;
+        font-size: 17px;
+    }
+    
+    .header
+    {
+      position: fixed;
+        top: 57px;
+       left: 0px; 
+       width: 100%;
+       z-index:3;
+       text-align: center;
+    }
+    
+    .startfree
+    {
+        width: 300px;
+        height: 60px;
+        background: #4b0e79;
+        position: absolute;
+        left: 50%;
+        bottom: 27px;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+    }
+    
+    .centerbody
+    {
+      background: url(pictures/map.png);
+      position: absolute;
+      opacity: 0.03;
+      height: 495px;
+      width: 100%;
+      z-index: 1;
+      left: 50%;
+      background-size: 200% 100%;
+      background-position-x: -120px;
+      top: 49%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    
+    .containerzz
+    {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+    }
+    .containerzz .ringplus
+    {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: -30px;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        border-top: 4px solid #24ecff;
+        animation: animate 4s linear infinite;
+    }
+    @keyframes animate
+    {
+        0%
+        {
+            transform: rotate(0deg);
+        }
+        100%
+        {
+            transform: rotate(360deg);
+        }
+    }
+    .containerzz .ringplus::before
+    {
+        content: '';
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        background: #24ecff;
+        box-shadow: 0 0 0 5px #24ecff33,
+        0 0 0 10px #24ecff22,
+        0 0 0 20px #24ecff11,
+        0 0 20px #24ecff,
+        0 0 50px #24ecff;
+    }
+    .containerzz .ringplus:nth-child(2)
+    {
+        animation: animate2 4s linear infinite;
+        animation-delay: -1s;
+        border-top: 4px solid transparent;
+        border-left: 4px solid #93ff2d;
+    }
+    .containerzz .ringplus:nth-child(2)::before
+    {
+        content: '';
+        position: absolute;
+        top: initial;
+        bottom: 12px;
+        left: 12px;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        background: #93ff2d;
+        box-shadow: 0 0 0 5px #93ff2d33,
+        0 0 0 10px #93ff2d22,
+        0 0 0 20px #93ff2d11,
+        0 0 20px #93ff2d,
+        0 0 50px #93ff2d;
+    }
+    @keyframes animate2
+    {
+        0%
+        {
+            transform: rotate(360deg);
+        }
+        100%
+        {
+            transform: rotate(0deg);
+        }
+    }
+    .containerzz .ringplus:nth-child(3)
+    {
+        animation: animate2 4s linear infinite;
+        animation-delay: -3s;
+        position: absolute;
+        top: -66.66px;
+        border-top: 4px solid transparent;
+        border-left: 4px solid #e41cf8;
+    }
+    .containerzz .ringplus:nth-child(3)::before
+    {
+        content: '';
+        position: absolute;
+        top: initial;
+        bottom: 12px;
+        left: 12px;
+        border-radius: 50%;
+        width: 15px;
+        height: 15px;
+        background: #e41cf8;
+        box-shadow: 0 0 0 5px #e41cf833,
+        0 0 0 10px #e41cf822,
+        0 0 0 20px #e41cf811,
+        0 0 20px #e41cf8,
+        0 0 50px #e41cf8;
+    }
+    .containerzz p
+    {
+      position: absolute;
+      color: #9d9d9d;
+      font-size: 1.5em;
+      bottom: -129px;
+      text-shadow: 0px 0px 10px #ff000000;
+    }
+    #splashscreen
+    {
+      background: #0c0c11;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      z-index: 500;
+    }
+    
+    #application
+    {
+        display: none;
+    }
+    .menuiconx
+    {
+          position: absolute;
+        right: 19px;
+        filter: invert(1);
+        top: 44px;
+        height: 24px;
+    }
+    
+    #appname
+    {
+      font-size: 0px;
+      color: #ff3434;
+    }
+    
+    .pingserver
+    {
+       position: absolute;
+        right: 14px;
+        font-size: 13px;
+        color: #ccc;
+    }
+    
+    .premiumserver
+    {
+      display:none;
+    }
+    
+    .bronzeserver
+    {
+      display: none;
+    }
+    
+    .freeserver
+    {
+    }
+    
+    .goldserver
+    {
+      display: none;
+    }
+    
+    .recommendserver
+    {
+      display: none;
+    }
+    
+    .greenping
+    {
+        background: #49ff50;
+        width: 5px;
+        height: 13px;
+        position: absolute;
+        right: -8px;
+        border-radius: 55px;
+        top: 7px;
+    }
+    .orangeping
+    {
+        background: #ff9100;
+        width: 5px;
+        height: 13px;
+        position: absolute;
+        right: -8px;
+        border-radius: 55px;
+        top: 7px;
+    }
+    .redping
+    {
+        background: #ff0000;
+        width: 5px;
+        height: 13px;
+        position: absolute;
+        right: -8px;
+        border-radius: 55px;
+        top: 7px;
+    }
+    .svbubble
+    {
+      background: #0f171e;
+      width: 88%;
+      transform: translate(-50%, 0%);
+      left: 45%;
+      height: 31px;
+      border-radius: 8px;
+      top: 6px;
+      margin-bottom: 7px;
+      padding: 9px;
+      position: relative;
+    }
+    
+    .typeserver
+    {
+        position: relative;
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
+        top: 20px;
+    
+    }
+    .userprofile
+    {
+      background: url(pictures/149071.png);
+      position: relative;
+      height: 80px;
+      width: 220px;
+      background-size: 80px 80px;
+      border-bottom: 1px solid #2b3548;
+      background-repeat: no-repeat;
+      left: 15px;
+      top: 100px;
+      padding-bottom: 50px;
+      background-position-x: 65px;
+    }
+    
+    .descudp
+    {
+      left: 14px;
+      font-family: sans-serif;
+      top: 27px;
+    }
+    
+    #serverlist
+    {
+      position: fixed;
+      top: 56px;
+      left: 2.5%;
+      display: none;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      width: 95%;
+      border-bottom: 4px solid #9e9e9e;
+      border-top: 4px solid #9e9e9e;
+      background: #000000e0;
+      height: 56%;
+      padding-bottom: 100px;
+      z-index: 8;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      box-shadow: 8px 7px 9px black;
+    }
+    .lds-dual-ringzpzp {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      margin-left: -35px;
+      margin-top: 1px;
+    }
+    .lds-dual-ringzpzp:after {
+      content: " ";
+      display: block;
+      width: 47px;
+      height: 47px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 4px solid #000;
+      border-color: #000 #000000 #673ab7 black;
+      animation: lds-dual-ring 1.2s linear infinite;
+    }
+    
+    .userid
+    {
+          position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        color: #909090;
+    }
+    
+    .atlcircle
+    {
+      height: 19px;
+        width: 19px;
+        display: inline-block;
+        background: #e91e63;
+        border-radius: 60px;
+        position: absolute;
+        top: 9px;
+        box-shadow: 0px 0px 13px 3px #060810;
+        right: 15px;
+    }
+    .registerbubble
+    {
+      position: fixed;
+        right: 4px;
+        font-size: 14px;
+        font-weight: 100;
+        color: #cdd8df;
+        padding: 3px;
+        background: #04030491;
+        border-radius: 5px;
+        width: 91px;
+        transform: translate(-50%, -50%);
+        box-shadow: 3px 3px 5px #0000009c;
+        left: 14%;
+        top: 11%;
+    }
+    .userexp
+    {
+          position: absolute;
+            bottom: 23px;
+        color: #8e8e8e;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+    }
+    
+    .newbtx
+    {
+      text-align: left;
+      margin-left: -7px;
+      border-left: 2px solid #1e394e;
+      margin-top: 21px;
+      padding: 2px;
+    }
+    .starttext
+    {
+      font-size: 17px;
+    position: relative;
+    color: #dfdfee;
+    }
+    .menulist
+    {
+      position: absolute;
+        color: #adadaf;
+        top: 275px;
+        left: 52px;
+    }
+    .menuicon
+    {
+      position: absolute;
+      left: 3px;
+      top: 11px;
+      height: 23px;
+      padding: 5px;
+      filter: invert(1);
+    }
+    
+    .menutxt
+    {
+      position: relative;
+      margin-bottom: 30px;
+      margin-left: -38px;
+    }
+    .rightbt
+    {
+      position: absolute;
+      right: 10px;
+      transform: rotate( 
+    0deg
+    );
+      /* background: #00000052; */
+      text-align: center;
+      padding: 4px;
+      width: 33px;
+      height: 94px;
+      top: -1px;
+      border-radius: 60px;
+    }
+    
+    .menuicond
+    {
+       position: absolute;
+        height: 18px;
+        left: -27px;
+        top: 6px;
+        filter: invert(1);
+        opacity: 0.77;
+    }
+    .crowimg
+    {
+      height: 20px;
+      position: relative;
+      left: 11px;
+      top: 0px;
+      display: inline-block;
+    }
+    
+    .acceptbt
+    {
+      position: relative;
+      top: 14px;
+      padding: 5px;
+      background: #3f51b5;
+      width: 150px;
+      left: 82px;
+      border-radius: 5px;
+    }
+    
+    .activebt
+    {
+        position: relative;
+        top: 14px;
+        padding: 5px;
+        display: inline-block;
+        background: #3f51b5;
+        width: 78px;
+        border-radius: 5px;
+    }
+    .textboost
+    {
+        font-size: 14px;
+            color: #e6e6e6;
+    }
+    .titleboost
+    {
+        margin-top: -59px;
+            font-size: 24px;
+            color: #ffa382;
+            filter: grayscale(1);
+    }
+    
+    .wave {
+      animation-name: wave-animation;  /* Refers to the name of your @keyframes element below */
+      animation-duration: 2.5s;        /* Change to speed up or slow down */
+      animation-iteration-count: infinite;  /* Never stop waving :) */
+      transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+      display: inline-block;
+    }
+    
+    @keyframes wave-animation {
+        0% { transform: rotate( 0.0deg) }
+       10% { transform: rotate(14.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+       20% { transform: rotate(-8.0deg) }
+       30% { transform: rotate(14.0deg) }
+       40% { transform: rotate(-4.0deg) }
+       50% { transform: rotate(10.0deg) }
+       60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+      100% { transform: rotate( 0.0deg) }
+    }
+    
+    
+    #authshow
+    {
+      transform: translate(-50%, -50%);
+      position: fixed;
+      left: 49%;
+      top: 49%;
+      width: 90%;
+      height: 185px;
+      padding: 9px;
+      text-align: center;
+    }
+    .bodyboost
+    {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      height: 350px;
+      width: 80%;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      max-width: 352px;
+      border-bottom: 4px solid #9e9e9e;
+      border-top: 4px solid #9e9e9e;
+      background: #000000e0;
+    }
+    .atlantusoverlay
+    {   
+       display: none;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgb(4 5 10 / 78%);
+      z-index: 5;
+    }
+    #boostmode
+    {
+        display:none;
+        position: absolute; height: 100%;
+         width: 100%; 
+         backdrop-filter: blur(4px);
+         background: rgb(0 0 0 / 61%); z-index: 5;
+    }
+    #connectedpl
+    {
+        display:none;
+        position: absolute; height: 100%;
+         width: 100%; 
+         backdrop-filter: blur(4px);
+         background: rgb(0 0 0 / 61%); z-index: 5;
+    }
+    #storagemode
+    {
+        display:none;
+        position: absolute; height: 100%;
+         width: 100%; background: rgba(0, 0, 0, 0.76); z-index: 5;
+    }
+    .protxt
+    {
+      color: #dadada;
+        font-weight: 100;
+        display: inline-block;
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        left: 0px;
+    }
+    
+    
+    .blobs {
+      filter: url(#goo);
+      width: 300px;
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 70px;
+      transform-style: preserve-3d;
+    }
+    .blobs .blob-center {
+      transform-style: preserve-3d;
+      position: absolute;
+      background: #FFF200;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      transform-origin: left top;
+      transform: scale(0.9) translate(-50%, -50%);
+      -webkit-animation: blob-grow linear 3.4s infinite;
+              animation: blob-grow linear 3.4s infinite;
+      border-radius: 50%;
+      box-shadow: 0 -10px 40px -5px #FFF200;
+    }
+    
+    .blob {
+      position: absolute;
+      background: #FFF200;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      -webkit-animation: blobs ease-out 3.4s infinite;
+              animation: blobs ease-out 3.4s infinite;
+      transform: scale(0.9) translate(-50%, -50%);
+      transform-origin: center top;
+      opacity: 0;
+    }
+    .blob:nth-child(1) {
+      -webkit-animation-delay: 0.2s;
+              animation-delay: 0.2s;
+    }
+    .blob:nth-child(2) {
+      -webkit-animation-delay: 0.4s;
+              animation-delay: 0.4s;
+    }
+    .blob:nth-child(3) {
+      -webkit-animation-delay: 0.6s;
+              animation-delay: 0.6s;
+    }
+    .blob:nth-child(4) {
+      -webkit-animation-delay: 0.8s;
+              animation-delay: 0.8s;
+    }
+    .blob:nth-child(5) {
+      -webkit-animation-delay: 1s;
+              animation-delay: 1s;
+    }
+    
+    @-webkit-keyframes blobs {
+      0% {
+        opacity: 0;
+        transform: scale(0) translate(calc(-330px - 50%), -50%);
+      }
+      1% {
+        opacity: 1;
+      }
+      35%, 65% {
+        opacity: 1;
+        transform: scale(0.9) translate(-50%, -50%);
+      }
+      99% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0) translate(calc(330px - 50%), -50%);
+      }
+    }
+    
+    @keyframes blobs {
+      0% {
+        opacity: 0;
+        transform: scale(0) translate(calc(-330px - 50%), -50%);
+      }
+      1% {
+        opacity: 1;
+      }
+      35%, 65% {
+        opacity: 1;
+        transform: scale(0.9) translate(-50%, -50%);
+      }
+      99% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0) translate(calc(330px - 50%), -50%);
+      }
+    }
+    @-webkit-keyframes blob-grow {
+      0%, 39% {
+        transform: scale(0) translate(-50%, -50%);
+      }
+      40%, 42% {
+        transform: scale(1, 0.9) translate(-50%, -50%);
+      }
+      43%, 44% {
+        transform: scale(1.2, 1.1) translate(-50%, -50%);
+      }
+      45%, 46% {
+        transform: scale(1.3, 1.2) translate(-50%, -50%);
+      }
+      47%, 48% {
+        transform: scale(1.4, 1.3) translate(-50%, -50%);
+      }
+      52% {
+        transform: scale(1.5, 1.4) translate(-50%, -50%);
+      }
+      54% {
+        transform: scale(1.7, 1.6) translate(-50%, -50%);
+      }
+      58% {
+        transform: scale(1.8, 1.7) translate(-50%, -50%);
+      }
+      68%, 70% {
+        transform: scale(1.7, 1.5) translate(-50%, -50%);
+      }
+      78% {
+        transform: scale(1.6, 1.4) translate(-50%, -50%);
+      }
+      80%, 81% {
+        transform: scale(1.5, 1.4) translate(-50%, -50%);
+      }
+      82%, 83% {
+        transform: scale(1.4, 1.3) translate(-50%, -50%);
+      }
+      84%, 85% {
+        transform: scale(1.3, 1.2) translate(-50%, -50%);
+      }
+      86%, 87% {
+        transform: scale(1.2, 1.1) translate(-50%, -50%);
+      }
+      90%, 91% {
+        transform: scale(1, 0.9) translate(-50%, -50%);
+      }
+      92%, 100% {
+        transform: scale(0) translate(-50%, -50%);
+      }
+    }
+    @keyframes blob-grow {
+      0%, 39% {
+        transform: scale(0) translate(-50%, -50%);
+      }
+      40%, 42% {
+        transform: scale(1, 0.9) translate(-50%, -50%);
+      }
+      43%, 44% {
+        transform: scale(1.2, 1.1) translate(-50%, -50%);
+      }
+      45%, 46% {
+        transform: scale(1.3, 1.2) translate(-50%, -50%);
+      }
+      47%, 48% {
+        transform: scale(1.4, 1.3) translate(-50%, -50%);
+      }
+      52% {
+        transform: scale(1.5, 1.4) translate(-50%, -50%);
+      }
+      54% {
+        transform: scale(1.7, 1.6) translate(-50%, -50%);
+      }
+      58% {
+        transform: scale(1.8, 1.7) translate(-50%, -50%);
+      }
+      68%, 70% {
+        transform: scale(1.7, 1.5) translate(-50%, -50%);
+      }
+      78% {
+        transform: scale(1.6, 1.4) translate(-50%, -50%);
+      }
+      80%, 81% {
+        transform: scale(1.5, 1.4) translate(-50%, -50%);
+      }
+      82%, 83% {
+        transform: scale(1.4, 1.3) translate(-50%, -50%);
+      }
+      84%, 85% {
+        transform: scale(1.3, 1.2) translate(-50%, -50%);
+      }
+      86%, 87% {
+        transform: scale(1.2, 1.1) translate(-50%, -50%);
+      }
+      90%, 91% {
+        transform: scale(1, 0.9) translate(-50%, -50%);
+      }
+      92%, 100% {
+        transform: scale(0) translate(-50%, -50%);
+      }
+    }</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<div id="withoutlogin" class="body">
+    <div id="updatechecking" style="
+    position: absolute;
+    bottom: 63px;
+    display:none;
+    left: 42px;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+"><div class="lds-dual-ring" style="
+    height: 30px;
+    width: 30px;
+    position: relative;
+    top: 7px;
+    left: -3px;
+"></div>Buscando atualização...</div>
+<div id="menuexpand" onclick="menuclose()">
+    <div class="menulist">
+        <div class="menutxt" onclick=" initupdate();">🔰 Verificar atualizações</div>
+        <div class="menutxt" onclick="termos()">📃 Termos de uso</div>
+        <div class="menutxt" onclick="settings()">⚙️ Ajustes</div>
+        <div class="menutxt hsharez" style="display:none;" onclick="hostshare()">🔌 HostShare</div>
+        <div class="menutxt ipv6txt"  style="display:none;" onclick="setipv6()">🕋 IPV6 (Desligado)</div>
+        <div class="menutxt" onclick="exitapp('')">❌ Encerrar aplicativo</div>
+    </div>
+    <div class="userprofile">
+        <div class="userid">USER-ID: 0000xx</div>
+    </div>
+    <img src="pictures/menu.png" class="menuiconx" />
+</div>
+
+
+
+
+
+<div id="settingsapp" class="atlantusoverlay" >
+    <div class="bodyboost" style="
+    height: 358px;
+">
+  
+    <div class="titleboost" style="       color: #ffc83d;
+    margin-top: -121px;
+    font-size: 90px;
+    color: azure;
+"><br>
+    <div class="textboost" style="
+    margin-top: -55px;
+    margin-bottom: 38px;
+    font-size: 18px;
+    ">Área destinada a ajustes de vpn.</div></div>
+    <div style="    height: 214px;
+    overflow: scroll;
+    position: relative;
+    padding-top: 19px;">
+    <div class="selectedserver udplist"  style="
+        width: 29%;
+    z-index: 25;
+    height: 134px;
+    position: absolute;
+    border-radius: 6px;
+    background: rgb(17, 15, 29);
+    left: 58%;
+    top: 0px;
+">
+</div>
+    <div class="menutxt newbtx" style="margin-bottom: -5px; margin-left: -8px; margin-top: -20px;" onclick="udpchange()">📌 Porta UDP <div id="udpbubble" class="atlcircle descudp" style="     padding: 0px;
+        padding: 0px;
+    top: 9px;
+    color: #999;
+    background: transparent;
+    font-size: 15px;
+    left: 74%;">%</div></div>
+    <div class="menutxt newbtx" style="margin-bottom: -5px; margin-left: -8px;" onclick="setipv6()">📌 IPV6 <div id="ipv6bubble" class="atlcircle"></div></div>
+    <div class="menutxt newbtx" style="margin-bottom: -5px; margin-left: -8px; " onclick="setvelocimetro()">📌 Velocimetro <div id="velocimetrobubble" class="atlcircle"></div></div>
+    <div class="menutxt newbtx" style="margin-bottom:0px;    margin-left: -8px;" onclick="setdialogpass()">📌 Evitar erro de login <div id="wrongauthbubble" class="atlcircle"></div></div>
+    <div class="menutxt newbtx" style="margin-bottom:0px;    margin-left: -8px;" onclick="setkeepvpn()">📌 KeepVPN <div id="keepvpnbubble" class="atlcircle"></div></div>
+    <div class="menutxt newbtx" style="margin-bottom:0px;    margin-left: -8px;" onclick="hostshare()">📌 Hostshare </div>
+    <div class="menutxt newbtx" style="margin-bottom:0px;    margin-left: -8px;" onclick="setdatacompression()">📌 Compressão de dados <div id="compressbubble" class="atlcircle"></div></div>
+    </div>
+    <br>
+    <div onclick="exitsettings()" class="activebt" style="margin-left: 5px;background: #ab2323;width: 80%;border-radius: 4px;box-shadow: 5px 4px 5px black;">Fechar</div>
+    </div></div>
+
+
+
+    <div id="exitapp" class="atlantusoverlay">
+        <div class="bodyboost" style="
+        height: 260px;
+    "><span class="wave" style="
+    height: 106px;
+    position: relative;
+    top: -70px;
+    font-size: 70px;
+    margin-left: -16px;
+">👋</span>
+      
+        <div class="titleboost" style="
+        color: #ffc83d;
+    ">Deseja realmente sair?<br>
+        <div class="textboost">Sua conexão será encerrada, se você confirmar este dialogo.</div></div>
+        <br>
+        <div onclick="exitappfinish()" class="activebt hshareon">Sim</div>
+        <div onclick="exitappclose()" class="activebt" style="
+    margin-left: 5px;
+    background: #b2355b;
+">Não</div><div onclick="exitapphide()" class="activebt" style="
+    margin-left: 5px;
+    background: #673ab7;
+    margin-top: 5px;
+">Minimizar</div>
+        </div></div>
+
+
+
+
+    <div id="hostshare" class="atlantusoverlay" style="">
+        <div class="bodyboost" style="
+        height: 246px;
+    ">
+            <img src="pictures/hostshare.gif" style="
+            height: 106px;
+            position: relative;
+            top: -55px;
+            filter: invert(1);
+        ">
+        <div class="titleboost" style="
+        color: #2196f3;
+    ">HostShare<br>
+        <div class="textboost">Esta função serve para rotear para outros dispositivos o hostshare, caso queira configurar, clique em gerenciar.</div></div>
+        <br>
+        <div onclick="hostshareset()" class="activebt hshareon">Gerenciar</div>
+        <div onclick="hostshareclose()" class="activebt" style="
+    margin-left: 5px;
+    background: #b2355b;
+">Cancelar</div>
+        </div></div>
+
+
+
+    <div id="wronguser" class="atlantusoverlay">
+        <div class="bodyboost" style="
+        height: 246px;
+    ">
+            <img src="pictures/wrong.svg" style="
+            height: 106px;
+            position: relative;
+            top: -55px;
+        ">
+        <div class="titleboost" style="
+        color: #ff2222;
+    ">Autenticação Falhou<br>
+        <div class="textboost">Seus dados de usuário estão incorretos, por favor verifique novamente o seu acesso.</div></div>
+        <br><div onclick="authfinishu()" class="activebt">Corrigir</div>
+        </div></div>
+
+
+        <div id="deviceid" class="atlantusoverlay" style="display:none;">
+            <div class="bodyboost" style="height: 247px;border-radius: 30px;border: 0px;background: linear-gradient(273deg, #f48931, #a32020);">
+                <img src="pictures/limiter.png" style="
+                height: 130px;
+                position: relative;
+                top: -59px;
+                margin-top: -26px;
+            ">
+            <div class="titleboost" style="
+            color: #f0f0f0;
+            filter: none;
+            ">Limite Ultrapassado<br>
+            <div class="textboost" style="font-size: 14px; color: #e6e6e6; height: 168px; overflow: scroll;">
+              <center>Este acesso já ultrapassou o limite de dispositivos registrados.<br>
+             Entre em contato com o fornecedor para mais informações.<br>
+            </center></div></div>
+            <br><div onclick="deviceclose()" style="
+            width: 200px;
+            background: #07060c;
+            top: -74px;
+            " class="activebt">Confirmar</div>
+          </div></div>
+
+        <div id="permissao" class="atlantusoverlay" style="display: none;">
+            <div class="bodyboost">
+                <img src="pictures/terms.svg" style="
+                height: 106px;
+                position: relative;
+                top: -55px;
+            ">
+            <div class="titleboost" style="
+            color: #ffd800; filter: none;">Permissão Necessária<br>
+            <div class="textboost" style="font-size: 14px; color: #e6e6e6; height: 168px; overflow: scroll;">
+              <center>Você precisa permitir a sobreposição, isso serve para que a VPN sempre se<br>
+                 mantenha ativa e também com o processo acima de outros aplicativos
+                   para que o sistema não encerre a menos que você mesmo faça.<br>
+                   Você só precisa fazer isso uma única vez.</center></div></div>
+            <br><div onclick="permitirsob()" style="
+            width: 200px;
+            background: #fe9500;" class="activebt">Permitir</div>
+          </div></div>
+
+          
+          <div id="logsviewnew" class="atlantusoverlay" style="display: none;">
+            <div class="bodyboost" style="
+        height: 69%;
+        top: 50%;
+    ">
+                <img src="pictures/document.png" style="
+                height: 106px;
+                position: relative;
+                top: -55px;
+            ">
+            <div class="titleboost" style=" color: #e64c3c;">
+            <div id="logslist" class="textboost" style="font-size: 12px;color: #e6e6e6;height: 168px;overflow: scroll;border-bottom: 2px solid;height: 79%;margin-top: 22px;">
+              <center>-- Bem vindo aos registros --</center></div></div>
+            <br><div onclick="logsviewnewclose()" class="activebt" style="
+        width: 300px;
+        top: -19px;
+    ">Fechar</div>
+          </div></div>
+
+
+    <div id="termos" class="atlantusoverlay">
+        <div class="bodyboost">
+            <img src="pictures/terms.svg" style="
+            height: 106px;
+            position: relative;
+            top: -55px;
+        ">
+        <div class="titleboost"  style=" color: #e64c3c;">Termos de Uso<br>
+        <div class="textboost" style="font-size: 14px; color: #e6e6e6; height: 168px; overflow: scroll;">
+          <center>Certifique-se de não usar este aplicativo para atividades ilegais, sua conta será suspensa se detectada.<br>
+            Algum conteúdo pode estar banido em seu país, então não acesse,<br>
+             apenas faça atividades básicas como filmes, jogos e música e pesquisas em geral,<br>
+              pornografia infantil e golpes são inaceitáveis ​​e você será severamente punido se usar<br>
+               este aplicativo para cometer esses absurdos .</center></div></div>
+        <br><div onclick="termos()" class="activebt">Concordo</div>
+      </div></div>
+
+
+
+      <div id="validadeapp" class="atlantusoverlay" style="display: none;">
+        <div class="bodyboost" style="
+        height: 148px;
+        background: white;
+        border: 0px;
+    "><div id="textvalidade" style="
+        position: absolute;
+        color: #333;
+        width: 100%;
+        top: 45px;
+        left: 0px;
+    "><div class="lds-dual-ringzpzp"></div></div>
+        
+        <img src="pictures/pet.png" style="
+        position: absolute;
+        right: -12px;
+        top: -87px;
+        height: 114px;
+    ">
+      
+        <div class="titleboost" style="
+        color: #ffc83d;
+        margin-top: -121px;
+        font-size: 90px;
+    "><br>
+        <div class="textboost" style="
+        margin-top: -55px;
+        margin-bottom: 38px;
+        font-size: 18px;
+        color: #222;
+        ">Checando Validade</div></div>
+        
+        <br>
+        <div onclick="closevalidity()" class="activebt" style="margin-left: 5px;background: #313048;width: 80%;border-radius: 4px;box-shadow: 5px 4px 5px black;margin-top: 17px;">Fechar</div>
+        </div></div>
+
+      
+
+
+
+
+
+
+    <div id="devtest" style="display:none;" class="atlantusoverlay">
+        <div class="bodyboost">
+            <img src="pictures/terms.svg" style="
+            height: 106px;
+            position: relative;
+            top: -55px;
+        ">
+        <div class="titleboost"  style=" color: #e64c3c;">Aplicativo de TESTE<br>
+        <div class="textboost" style="font-size: 14px; color: #e6e6e6; height: 168px; overflow: scroll;">
+          <center>Esse aplicativo é apenas um teste produzido por RGN & ATLANTUS.<br>
+            Não divulgue esta versão, não altere nem faça nada.<br>
+            Teste conexões e afins.<br>
+              Agradecemos sua contribuição.</center></div></div>
+        <br><div onclick='dev()' class="activebt">Concordo</div>
+      </div></div>
+
+    
+    <div id="storagemode">
+        <div class="bodyboost" style="
+        height: 241px;">
+            <img src="pictures/lock.svg" style="
+            height: 106px;
+            position: relative;
+            top: -55px;
+        ">
+        <div class="titleboost"  style="
+        color: #b79608;">Acesso Restrito<br>
+        <div class="textboost">Este acesso atingiu o limite em dipositivos que pode conectar, caso esta mensagem seja um engano, contate o fornecedor de serviço para mais informações.</div></div>
+        <br><div onclick="storagemode()" class="activebt">Certo</div>
+      </div></div>
+    
+      <div id="connectedpl" >
+        <div class="bodyboost" style="
+        height: 271px;">
+            <img src="pictures/check.svg" style="
+            height: 106px;
+            position: relative;
+            top: -55px;
+        ">
+        <div class="titleboost" style="
+        color: #6d86ff;
+    ">Conectado com sucesso<br>
+        <div class="textboost">Conexão bem sucedida, fique atento <b style="
+        color: cadetblue;
+    ">{{ username }}</b> faltam 56 dias para seu acesso expirar, recomendamos renovar de forma antecipada para que ele não seja excluido após acabar os dias.</div></div>
+        <br><div onclick="$('#connectedpl').fadeOut(0);" class="activebt" style="    color: white;
+        background: #12226e;">Entendi</div>
+        </div></div>
+
+
+    <div id="boostmode">
+    <div class="bodyboost">
+        <img src="pictures/boost.svg" style="
+        height: 106px;
+        position: relative;
+        top: -55px;
+    ">
+    <div class="titleboost">Modo Boost<br>
+    <div class="textboost">O modo Boost pode otimizar a velocidade e detectar os aplicativos usados &ZeroWidthSpace;&ZeroWidthSpace;para melhorar a experiência de conexão, você pode habilitar este modo. No entanto, você precisa conceder as permissões necessárias para realizar esta atividade.</div></div>
+    <br><div onclick="acboostmode()" class="activebt">Ativar</div>
+    <div onclick="boostmode()" style="margin-top: 5px; background: #9e330a;" class="activebt">Cancelar</div></div></div>
+
+    
+<div id="authtype" style="
+position: absolute;
+height: 100%;
+width: 100%;
+display:none;
+background: #000000c2;
+z-index: 5;
+"><div style="
+position: absolute;
+left: 50%;
+top: 35%;
+-webkit-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+background: #1e2532;
+height: 250px;
+width: 330px;
+border-radius: 10px;
+text-align: center;
+"><img src="pictures/149071.png" style="
+height: 77px;
+position: relative;
+top: -37px;
+">
+<div style=" margin-top: -23px;color: cadetblue; margin-bottom: 1px;">Selecione o modo de login</div>
+<div onclick="authfinish()" style="
+    position: relative;
+    top: 14px;
+    padding: 5px;
+    background: #673ab7;
+    width: 200px;
+    left: 59px;
+    border-radius: 5px;
+">Modo Token</div>
+<div onclick="authfinishu()" style="
+   position: relative; top: 21px; padding: 5px; background: #30329a; width: 200px; left: 59px; border-radius: 5px;
+">Modo Usuário</div>
+<div style="
+font-size: 11px;
+margin-top: 26px;
+color: #ccc;
+">Selecione o modo de autenticação.</div></div></div>
+
+
+
+
+<div id="authtoken" style="
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display:none;
+    background: #000000c2;
+    z-index: 5;
+    "><div style="
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: #1e2532;
+    height: 250px;
+    width: 330px;
+    border-radius: 10px;
+    text-align: center;
+"><img src="pictures/user.png" style="
+    filter: invert(1);
+    height: 77px;
+    position: relative;
+    top: -37px;
+">
+<div style="
+    margin-top: -11px;
+">Acesso token</div><input type="text" id="token" placeholder="token" style="
+    padding: 10px;
+    border-radius: 5px;
+    background: #191e25;
+    border: 0px;
+    font-size: 18px;
+    color: #999;
+    margin-top: 11px;
+">
+<div onclick="authfinish()" style="
+    position: relative;
+    top: 14px;
+    padding: 5px;
+    background: #3f51b5;
+    width: 100px;
+    left: 106px;
+    border-radius: 5px;
+">Entrar</div>
+<div style="
+    font-size: 11px;
+    margin-top: 26px;
+    color: #ccc;
+">O acesso token pode ser obtido com o fornecedor.</div></div></div>
+
+
+
+    <div id="logsbar" style="display:none;" onclick="viewlogs()"><div id="openlog" style="
+    text-align: center;
+    font-size: 14px;
+    margin-top: 8px;
+">🔼 Expandir Logs 🔼</div> <div id="logsview"></div></div>
+
+<div onclick="logsviewnewopen()" style="position: absolute;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);
+bottom: 6%;left: 50%;font-size: 18px;width: 330px;text-align: center;color: #000000;z-index: 6;
+border-bottom: 1px dashed;width: 142px;padding-left: 17px;">
+<img src="pictures/share.png" style=" 
+    height: 20px;
+    position: absolute;
+    margin-left: -26px;
+    margin-top: 7px;
+    ">Registros</div>
+    <div id="dontconnect" class="presshere divField">Pronto para iniciar</div>
+    <div id="connecting" class="presshere divField"><div class="lds-dual-ring"></div>Conectando</div>
+    <div id="connected" class="presshere divField">Conexão Estabelecida</div>
+</div><div id="withoutlogin" class="header">
+    <div class="moonbottom divField" id="moonbottom"></div>
+
+<div class="focuinauth"></div>
+<div id="nrlixserver" style="
+"><center>
+    <div id="serverlist" onclick="serverchange()">
+    
+    </div>
+    
+    <div class="focuinserver"></div>
+
+
+
+<div id="authshow">
+    <div id="contentblock" style="
+    position: fixed;
+    top: -49px;
+    width: 97%;
+    z-index: 21;
+    display: none;
+    height: 106%;
+"></div>
+
+    <div class="selectedserver selectedserverz" onclick="serverchange()">
+    <img id="fserver" src="pictures/flags/none.png" class="flagserver">
+    <div id="nserver" class="nameserver">Defina um provedor</div>
+    <div id="dserver" class="descserver">O modo de proteção</div>
+    <img src="pictures/arrow.png" class="arrowserver">
+    </div>
+<div style="
+    background: #04030491;
+    width: 91%;
+    height: 29px;
+    border-radius: 4px;
+    z-index: 5;
+    padding: 9px;
+    border: 1px solid #0d0d26;
+    position: relative;
+    display: inline-block;
+    margin-top: -43px;
+    box-shadow: 4px 5px 8px 0px #000000;
+"><img src="pictures/user.png" style="
+    position: absolute;
+    left: 10px;
+    height: 24px;
+    top: 11px;
+    filter: invert(1);
+    opacity: 0.8;
+"><input placeholder="Login" class="nrlixuser" style="
+    position: absolute;
+    width: 82%;
+    left: 50px;
+    padding: 8px;
+    background: transparent;
+    border: 0px;
+    font-size: 19px;
+    color: #797979;
+    top: 5px;
+"></div><div class="divField" style="
+    background: #04030491;
+    width: 91%;
+    height: 29px;
+    border-radius: 4px;
+    z-index: 5;
+    padding: 9px;
+    border: 1px solid #0d0d26;
+    position: relative;
+    display: inline-block;
+    margin-top: 8px;
+    box-shadow: 4px 5px 8px 0px #000000;
+"><img src="pictures/pass.png" style="
+    position: absolute;
+    left: 10px;
+    height: 24px;
+    top: 11px;
+    filter: invert(1);
+    opacity: 0.8;
+"><input placeholder="Senha" class="nrlixpass" style="
+    position: absolute;
+    width: 82%;
+    left: 50px;
+    padding: 8px;
+    background: transparent;
+    border: 0px;
+    font-size: 19px;
+    color: #797979;
+    top: 5px;
+"></div>
+<div onclick="startatlantus()" class="connectbt divField" style="z-index: 22;">
+  <div class="starttext divField">Conectar</div></div>
+</div>
+
+</center></div>
+<div id="menubutton" class="registerbubble divField" style="    left: 14%;
+top: 11%;" onclick="menuaction()"><img src="pictures/menububble.png" style="
+    position: relative;
+    left: -31px;
+    top: 1px;
+    height: 22px;
+    padding: 5px;
+    filter: invert(1);
+    " class="menuicon"><div style="
+    position: absolute;
+    top: 6px;
+    left: 39px;
+">Menu</div></div>
+
+<div id="appname"></div>
+<img class="logoapp divField" id="logoapp" style="
+left: 50%;
+top: 13%;" src="pictures/atlantus.png">
+<div class="logoappx" style="
+    display:none;
+     height: 107px;
+    background-size: 100% 100%;
+    width: 107px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 109px;
+    position: fixed;
+"></div>
+<div style="display:none;" class="statusserver">Status:
+<div class="substatusz">Desconectado</div>
+</div>
+
+    
+</div>
+<div id="newobjects" style="background: url(Linkhttps://www.google.com/imgres?imgurl=https%3A%2F%2Fredacaonline.com.br%2Fblog%2Fwp-content%2Fuploads%2F2016%2F05%2FLimite-da-internet.jpg&imgrefurl=https%3A%2F%2Fredacaonline.com.br%2Fblog%2Fcomo-fazer-uma-redacao%2Ftema-de-redacao-limitacao-da-internet-fixa-no-brasil%2F&tbnid=2gBJh1C05VEnYM&vet=1&docid=C19NIlU6m7mJ_M&w=1280&h=660&source=sh%2Fx%2Fim Do Fundo); background-size: 100% 100%;"> </div>
+</div>
